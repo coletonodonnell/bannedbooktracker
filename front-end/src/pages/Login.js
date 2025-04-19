@@ -27,17 +27,18 @@ function Login() {
         }
 
         console.log('Logging in with:', { email, password });
-        // After successful login, you might redirect the user or update the UI
     };
 
     return (
         <div>
-            {userLoggedIn && (<Navigate to='/' replace={true} />)}
+            {userLoggedIn && (<Navigate to='/accounts' replace={true} />)}
         <div className="login-container">
-            <img
-                src={book_icon}
-                alt="book logo"
-                className="login-form-image" />
+            <Link to="/">
+                <img
+                    src={book_icon}
+                    alt="book logo"
+                    className="login-form-image" />
+            </Link>
             <div>
                 <form onSubmit={handleSubmit} className="login-form">
                     <div>
@@ -74,7 +75,7 @@ function Login() {
                 <div className="login-form-div">
                     <label className="login-form-text">NEW TO BANNED BOOK TRACKER?</label>
                     <Link to="/signup">
-                        <button className="login-form-white-button" type="submit">SIGN UP disabled={isSigningIn}</button>
+                        <button className="login-form-white-button" type="submit" disabled={isSigningIn}>SIGN UP</button>
                     </Link>
                 </div>
             </div>

@@ -1,105 +1,61 @@
-/*
-import { Link } from 'react-router-dom';
-
-
-function NavBar() {
-  return (
-      <div>
-    <nav>
-      <ul className="navbar" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-        <li>
-            <img
-                src={book_icon}
-                alt="Banned Book Tracker Logo"
-                className="logo"/>
-        </li>
-        <li className="navbar-link">
-          <Link to="/" style={{ textDecoration: 'none' }}>HOME</Link>
-        </li>
-        <li className="navbar-link">
-          <Link to="/mybooks" style={{ textDecoration: 'none' }}>MY BOOKS</Link>
-        </li>
-        <li className="navbar-link">
-          <Link to="/browse" style={{ textDecoration: 'none' }}>BROWSE</Link>
-        </li>
-      </ul>
-    </nav>
-      <hr />
-          </div>
-  );
-}
-
-export default NavBar;*/
-import React from 'react';
+import {Link, useLocation} from 'react-router-dom';
+import React, {useState} from 'react';
 import "./NavBar.css";
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import book_icon from "../pictures/book_icon.png";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import account_icon from "../pictures/account_icon.png";
+import message_icon from "../pictures/message_icon.png";
+import notif_icon from "../pictures/notif_icon.png";
 
 function NavBar() {
-  return (
 
-    /*<Navbar expand="lg">
+    const location = useLocation();
+
+     // Array of paths where the navbar should be hidden
+    const noNavbar = ['/login', '/signup', '/reset', "/create-account"];
+
+    // Check if the current path is in the noNavbarPaths array
+    const shouldHideNavbar = noNavbar.includes(location.pathname);
+
+  return shouldHideNavbar ? null : (
+
       <Container>
-        <Navbar.Brand href="#home">
-          <img
-          src={book_icon}
-          alt="book icon"
-          className="logo"/>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse >
-          <Nav >
-            <Nav.Link href="#home">HOME</Nav.Link>
-            <Nav.Link href="#link">MY BOOKS</Nav.Link>
-            <NavDropdown title="Dropdown" >
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>*/
-
-      <Navbar className="navbar">
-        <Navbar.Brand href="#home">
-          <img
-          src={book_icon}
-          alt="book icon"
-          className="logo"/>
-        </Navbar.Brand>
-        <Nav.Link href="#home" className="navbar-link">HOME</Nav.Link>
-        <Nav.Link href="#mybooks" className="navbar-link">MY BOOKS</Nav.Link>
-        <NavDropdown title="BROWSE" className="navbar-link">
-              <NavDropdown.Item href="#action/3.1">GENRE 1</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                GENRE 2
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">GENRE 3</NavDropdown.Item>
-        </NavDropdown>
-          <Form inline>
-            <Form.Control
-              type="text"
+        <Navbar className="navbar">
+            <Navbar.Brand href="/">
+                <img
+                src={book_icon}
+                alt="book icon"
+                className="logo"/>
+            </Navbar.Brand>
+            <Link to="/" className="navbar-link">HOME</Link>
+            <Link to="/lists" className="navbar-link">LISTS</Link>
+            <Link to="/search" className="navbar-link">BROWSE</Link>
+            <div className="spacer2"></div>
+            <input
+              type="search"
               placeholder="Search"
               className="navbar-search"
+              style={{height: 30}}
             />
-      </Form>
-      </Navbar>
-
+            <div className="spacer"></div>
+            <img
+                src={notif_icon}
+                alt="notification icon"
+                className="icon"/>
+            <img
+                src={message_icon}
+                alt="message icon"
+                className="icon"/>
+            <Link to="/accounts" style={{ alignSelf: "flex-end" }}>
+            <img
+                src={account_icon}
+                alt="account icon"
+                className="icon"/>
+            </Link>
+        </Navbar>
+      </Container>
   );
 }
 
